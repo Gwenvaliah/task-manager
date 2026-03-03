@@ -16,30 +16,30 @@ var/
 sdist/
 wheels/
 .installed.cfg
- 
+
 # Environnements virtuels
 venv/
 .venv/
 env/
 .env/
 ENV/
- 
+
 # Variables d'environnement
 .env
 .env.local
 .env.*.local
- 
+
 # Pytest
 .pytest_cache/
 .coverage
 htmlcov/
- 
+
 # MyPy
 .mypy_cache/
- 
+
 # Jupyter
 .ipynb_checkpoints/
- 
+
 # ============================================================
 # JAVASCRIPT / NODE
 # ============================================================
@@ -49,25 +49,25 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
- 
+
 # Build
 dist/
 build/
 .next/
 .nuxt/
 out/
- 
+
 # Cache
 .cache/
 .parcel-cache/
 .eslintcache
- 
+
 # ============================================================
 # VS CODE
 # ============================================================
 .vscode/
 !.vscode/extensions.json
- 
+
 # ============================================================
 # SYSTÈME
 # ============================================================
