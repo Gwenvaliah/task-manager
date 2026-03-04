@@ -10,16 +10,16 @@ jobs:
   analyze:
     name: SonarQube analyze
     runs-on: ubuntu-latest
-  steps:
-    - name: Checkout du code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
-    - name: Analyse sonar
-      uses: SonarSource/sonarqube-scan-action@v6
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Analyse sonar
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   build-backend:
     name: Build backend
