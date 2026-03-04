@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-backend:
-    name: Build and analyze
+    name: Build and analyze backend
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
             -t my-backend:latest
 
   build-frontend:
-    name: Build and analyze
+    name: Build and analyze frontend
     runs-on: ubuntu-latest
 
     steps:
