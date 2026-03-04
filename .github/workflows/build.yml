@@ -1,4 +1,4 @@
-name: Build
+name: Docker Build
 
 on:
   push:
@@ -7,21 +7,46 @@ on:
 
 
 jobs:
-  build:
+  build-backend:
     name: Build and analyze
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout du code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - uses: SonarSource/sonarqube-scan-action@v6
+      - name: Analyse sonar
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-      # - uses: SonarSource/sonarqube-quality-gate-action@v1
-      #   timeout-minutes: 5
-      #   env:
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Build Backend Image
+        run: |
+          cd backend
+          docker build \
+            --build-arg HTTP_PROXY="${{ env.HTTP_PROXY }}" \
+            --build-arg HTTPS_PROXY="${{ env.HTTPS_PROXY }}" \
+            -t my-backend:latest
+
+  build-frontend:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Analyse sonar
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: Build Frontend Image
+        run: |
+          cd frontend
+          docker build \
+            --build-arg HTTP_PROXY="${{ env.HTTP_PROXY }}" \
+            --build-arg HTTPS_PROXY="${{ env.HTTPS_PROXY }}" \
+            -t my-frontend:latest
