@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM nginx:alpine
 
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
@@ -6,13 +6,8 @@ ARG HTTPS_PROXY
 ENV HTTP_PROXY=$HTTP_PROXY
 ENV HTTPS_PROXY=$HTTPS_PROXY
 
-WORKDIR /app
+COPY . /usr/share/nginx/html
 
-COPY package*.json ./
-RUN npm install
+EXPOSE 80
 
-COPY . .
-
-EXPOSE 5173
-
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["nginx", "-g", "daemon off;"]
