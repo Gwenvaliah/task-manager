@@ -36,7 +36,7 @@ jobs:
           docker build \
             --build-arg HTTP_PROXY="${{ env.HTTP_PROXY }}" \
             --build-arg HTTPS_PROXY="${{ env.HTTPS_PROXY }}" \
-            -t my-backend:latest
+            -t my-backend:latest .
 
   build-frontend:
     name: Build frontend
@@ -53,4 +53,4 @@ jobs:
           docker build \
             --build-arg HTTP_PROXY="${{ env.HTTP_PROXY }}" \
             --build-arg HTTPS_PROXY="${{ env.HTTPS_PROXY }}" \
-            -t my-frontend:latest
+            -t my-frontend:latest .
